@@ -5,17 +5,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Arfiaa Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'bebas': ['"Bebas Neue"', 'sans-serif'],
+            'inter': ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
-<body id="home" class="flex flex-col h-full bg-black bg-cover bg-fixed bg-no-repeat bg-center" style="background-image: url('/img/cover.jpg')">
+<body id="home" class="flex flex-col h-full bg-black bg-cover bg-fixed bg-no-repeat bg-center font-inter text-base" style="background-image: url('/img/cover.jpg')">
   <nav class="bg-gray-100 m-0 sticky top-0 flex justify-center">
-    <div class="container flex items-center justify-between px-4 py-2">
-      <h4 class="text-xl font-semibold">Arfiaa Studio</h4>
+    <div class="container max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
+      <h4 class="text-2xl font-bebas tracking-wider">Arfiaa Studio</h4>
       <button class="navbar-toggler ml-auto" type="button" data-mdb-toggle="collapse"
         data-mdb-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent3"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -25,38 +40,38 @@
     <div class="collapse" id="navbarToggleExternalContent3">
       <div class="bg-gray-100 p-4">
         <button class="w-full text-left px-4 py-2 border-b hover:bg-gray-200 transition-colors">
-          <a href="./index.html" class="text-black no-underline">Home</a>
+          <a href="./index.html" class="text-black no-underline text-lg font-inter">Home</a>
         </button>
         <button class="w-full text-left px-4 py-2 border-b hover:bg-gray-200 transition-colors">
-          <a href="./contact.html" class="text-black no-underline">Contact</a>
+          <a href="./contact.html" class="text-black no-underline text-lg font-inter">Contact</a>
         </button>
         <button class="w-full text-left px-4 py-2 border-b hover:bg-gray-200 transition-colors">
-          <a href="./portfolio.html" class="text-black no-underline">Portfolio</a>
+          <a href="./portfolio.html" class="text-black no-underline text-lg font-inter">Portfolio</a>
         </button>
       </div>
     </div>
   </nav>
 
   <section class="h-[75vh] mt-20 md:mt-20 md:pt-20 text-center">
-    <div>
-      <h2 class="text-7xl text-gray-100">
+    <div class="container max-w-6xl mx-auto px-4">
+      <h2 class="text-5xl md:text-7xl font-bebas tracking-wider text-gray-100">
         Relive Every <br />
         Moment
       </h2>
     </div>
     <div class="text-center m-20 md:p-20">
-      <a id="contact-me-button" class="text-center p-3 bg-[#0f0f0f] rounded-full text-gray-100 no-underline hover:opacity-90 transition-opacity duration-100 font-sans" href="./html/contact.html">Contact Me</a>
+      <a id="contact-me-button" class="text-center p-3 bg-[#0f0f0f] rounded-full text-gray-100 no-underline hover:opacity-90 transition-opacity duration-100 text-lg font-inter" href="./html/contact.html">Contact Me</a>
     </div>
   </section>
 
   <section id="about-me" class="bg-black pt-4 lg:p-20">
-    <div class="container text-gray-100 md:flex">
+    <div class="container max-w-6xl mx-auto px-4 text-gray-100 md:flex">
       <div class="w-1/2 md:w-1/3 lg:w-1/4 mx-auto">
         <img src="/img/profile.jpg" alt="" class="rounded-full w-full" />
       </div>
       <div class="w-full md:w-2/3 p-4 sm:p-20 text-center">
-        <h2>Who is Arfiaa Ammar ?</h2>
-        <p>
+        <h2 class="text-3xl md:text-4xl font-bebas tracking-wider mb-6">Who is Arfiaa Ammar ?</h2>
+        <p class="text-lg leading-relaxed font-inter">
           My name is Ammar Hazim aka Arfiaa Ammar. I'm a professional
           photographer based in Perak, Malaysia. I am primarily known for my
           portrait, events and wedding photography work in Perak and Shah
@@ -68,18 +83,83 @@
     </div>
   </section>
 
+  <section id="services" class="bg-[#171717] py-20">
+    <div class="container max-w-6xl mx-auto px-4 text-gray-100">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">Our Services</h2>
+        <p class="text-lg font-inter text-gray-300">Capturing your precious moments with professional excellence</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+        <!-- Wedding Photography -->
+        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300">
+          <div class="text-center mb-6">
+            <i class="fas fa-ring text-4xl mb-4"></i>
+            <h3 class="text-2xl font-bebas tracking-wider mb-4">Wedding Photography</h3>
+            <p class="text-base font-inter leading-relaxed text-gray-300">
+              Documenting your special day with a perfect blend of candid moments and artistic portraits. From preparation
+              to reception, we capture every emotional detail of your wedding story.
+            </p>
+          </div>
+          <ul class="text-sm font-inter text-gray-300 space-y-2 list-disc list-inside">
+            <li>Pre-wedding photoshoot</li>
+            <li>Full day wedding coverage</li>
+            <li>Artistic couple portraits</li>
+            <li>Family formal photos</li>
+          </ul>
+        </div>
+
+        <!-- Portrait Photography -->
+        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300">
+          <div class="text-center mb-6">
+            <i class="fas fa-camera text-4xl mb-4"></i>
+            <h3 class="text-2xl font-bebas tracking-wider mb-4">Portrait Photography</h3>
+            <p class="text-base font-inter leading-relaxed text-gray-300">
+              Professional portraits that capture your personality and style. Perfect for personal branding,
+              modeling portfolios, or family portraits that tell your unique story.
+            </p>
+          </div>
+          <ul class="text-sm font-inter text-gray-300 space-y-2 list-disc list-inside">
+            <li>Individual portraits</li>
+            <li>Family portraits</li>
+            <li>Corporate headshots</li>
+            <li>Fashion photography</li>
+          </ul>
+        </div>
+
+        <!-- Event Photography -->
+        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300">
+          <div class="text-center mb-6">
+            <i class="fas fa-calendar-alt text-4xl mb-4"></i>
+            <h3 class="text-2xl font-bebas tracking-wider mb-4">Event Photography</h3>
+            <p class="text-base font-inter leading-relaxed text-gray-300">
+              Professional coverage for all your special occasions. From corporate events to private celebrations,
+              we ensure every significant moment is preserved.
+            </p>
+          </div>
+          <ul class="text-sm font-inter text-gray-300 space-y-2 list-disc list-inside">
+            <li>Corporate events</li>
+            <li>Birthday celebrations</li>
+            <li>Graduation ceremonies</li>
+            <li>Product launches</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="WeddingGallery" class="bg-[#171717]">
-    <div class="container mt-20 lg:mt-20 lg:pt-20 lg:w-[70%]">
+    <div class="container max-w-5xl mx-auto px-4 mt-20 lg:mt-20 lg:pt-20">
       <div class="text-center text-white">
-        <h1>Weddings</h1>
+        <h1 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">Weddings</h1>
         <br />
-        <p>
+        <p class="text-lg leading-relaxed italic font-inter">
           "I love you, not only for what you are, but for what I am when I
           am with you. I love you, not only for what you have made of
           yourself but for what you are making of me."
         </p>
         <br />
-        <p>~ Roy Croft ~</p>
+        <p class="text-base font-inter">~ Roy Croft ~</p>
       </div>
       <div id="highlight-img">
         <img src="img/DSC_5937-2.jpg" id="current-wed" class="h-full w-full cursor-pointer" onclick="fullscreen(this)" />
@@ -99,18 +179,18 @@
   </section>
 
   <section id="PortraitGallery" class="bg-[#171717]">
-    <div class="container my-20 lg:w-[70%] lg:my-20 lg:py-20">
+    <div class="container max-w-5xl mx-auto px-4 my-20 lg:my-20 lg:py-20">
       <div class="text-center text-white">
-        <h1>Portraits</h1>
+        <h1 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">Portraits</h1>
         <br />
-        <p>
+        <p class="text-lg leading-relaxed italic font-inter">
           "To me, photography is an art of observation. It's about finding
           something interesting in an ordinary place… I've found it has
           little to do with the things you see and everything to do with
           the way you see them."
         </p>
         <br />
-        <p>~ Elliott Erwitt ~</p>
+        <p class="text-base font-inter">~ Elliott Erwitt ~</p>
       </div>
       <div>
         <img src="img/Funeral in My Brain-6.jpg" id="current-portrait" class="h-full w-full cursor-pointer" onclick="fullscreen(this)" />
@@ -134,7 +214,7 @@
 
   <div class="fixed bottom-4 right-4 flex">
     <div class="mt-auto mb-0">
-      <p class="text-gray-100 p-1 rounded bg-green-600">Hi, let's talk in Whatsapp</p>
+      <p class="text-gray-100 p-1 rounded bg-green-600 text-base font-inter">Hi, let's talk in Whatsapp</p>
     </div>
     <a href="https://wa.me/message/QYYQKYYYY3Y4B1" target="_blank">
       <img src="./img/logo/whatsapp-chat.png" alt="" class="w-16 h-auto hover:scale-110 transition-transform duration-100" />
@@ -142,9 +222,9 @@
   </div>
 
   <footer id="footer" class="bg-gray-100 text-center mt-auto py-3">
-    <div class="container mt-4">
+    <div class="container max-w-6xl mx-auto px-4 mt-4">
       <div class="w-full md:w-full">
-        <p>In collaboration with <a href="https://arfiaa-media.com" class="no-underline text-black"><b>ARFIAA Media</b></a>.</p>
+        <p class="text-base font-inter">In collaboration with <a href="https://arfiaa-media.com" class="no-underline text-black font-bold">ARFIAA Media</a></p>
       </div>
       <div class="w-full md:w-full p-3 pt-4">
         <a href="https://www.instagram.com/arfiaa.ammar/" class="hover:scale-110 transition-transform duration-100 inline-block" target="_blank">
@@ -158,7 +238,7 @@
         </a>
       </div>
       <div class="w-full md:w-full">
-        <p>
+        <p class="text-base leading-relaxed font-inter">
           I am committed in delivering my clients the best service as possible to the best of my abilities.
         </p>
       </div>
