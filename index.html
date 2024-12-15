@@ -1,607 +1,953 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arfiaa Studio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            'bebas': ['"Bebas Neue"', 'sans-serif'],
-            'inter': ['Inter', 'sans-serif'],
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0', transform: 'translateY(20px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Arfiaa Studio</title>
+    <link rel="icon" type="image/svg+xml" href="img/logo/arfiaa-studio-logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              bebas: ['"Bebas Neue"', "sans-serif"],
+              inter: ["Inter", "sans-serif"],
             },
-            slideIn: {
-              '0%': { transform: 'translateX(-100%)' },
-              '100%': { transform: 'translateX(0)' }
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              slideIn: {
+                "0%": { transform: "translateX(-100%)" },
+                "100%": { transform: "translateX(0)" },
+              },
+              scaleIn: {
+                "0%": { transform: "scale(0.9)", opacity: "0" },
+                "100%": { transform: "scale(1)", opacity: "1" },
+              },
             },
-            scaleIn: {
-              '0%': { transform: 'scale(0.9)', opacity: '0' },
-              '100%': { transform: 'scale(1)', opacity: '1' }
-            }
+            animation: {
+              fadeIn: "fadeIn 0.8s ease-out forwards",
+              slideIn: "slideIn 0.8s ease-out forwards",
+              scaleIn: "scaleIn 0.6s ease-out forwards",
+            },
           },
-          animation: {
-            fadeIn: 'fadeIn 0.8s ease-out forwards',
-            slideIn: 'slideIn 0.8s ease-out forwards',
-            scaleIn: 'scaleIn 0.6s ease-out forwards'
-          }
         },
-      },
-    }
-  </script>
-  <style>
-    .animate-delay-100 { animation-delay: 100ms; }
-    .animate-delay-200 { animation-delay: 200ms; }
-    .animate-delay-300 { animation-delay: 300ms; }
-    .animate-delay-400 { animation-delay: 400ms; }
-    .animate-delay-500 { animation-delay: 500ms; }
-    
-    @keyframes scrollLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+      };
+    </script>
+    <style>
+      .animate-delay-100 {
+        animation-delay: 100ms;
+      }
+      .animate-delay-200 {
+        animation-delay: 200ms;
+      }
+      .animate-delay-300 {
+        animation-delay: 300ms;
+      }
+      .animate-delay-400 {
+        animation-delay: 400ms;
+      }
+      .animate-delay-500 {
+        animation-delay: 500ms;
+      }
 
-    @keyframes scrollRight {
-      0% { transform: translateX(-50%); }
-      100% { transform: translateX(0); }
-    }
+      @keyframes scrollLeft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-20%);
+        }
+      }
 
-    .gallery-container {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      padding: 2rem 0;
-    }
+      @keyframes scrollRight {
+        0% {
+          transform: translateX(-20%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
 
-    .gallery-track {
-      display: flex;
-      width: fit-content;
-    }
+      .gallery-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        padding: 0.5rem 0;
+      }
 
-    .scroll-left {
-      animation: scrollLeft 30s linear infinite;
-    }
+      .gallery-track {
+        display: flex;
+        width: fit-content;
+      }
 
-    .scroll-right {
-      animation: scrollRight 30s linear infinite;
-    }
+      .scroll-left {
+        animation: scrollLeft 30s linear infinite;
+      }
 
-    .gallery-track:hover {
-      animation-play-state: paused;
-    }
-    
-    .gallery-item {
-      position: relative;
-      width: 300px;
-      margin: 0 1rem;
-      flex-shrink: 0;
-    }
-    
-    .gallery-item img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-    
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 1rem;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    
-    .gallery-item:hover .gallery-overlay {
-      transform: translateY(0);
-    }
-    
-    .gallery-grid {
-      display: grid;
-      grid-template-rows: repeat(2, 1fr);
-      gap: 1.5rem;
-      padding: 1.5rem 0;
-    }
+      .scroll-right {
+        animation: scrollRight 30s linear infinite;
+      }
 
-    .gallery-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 3/2;
-    }
-    
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-    
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 1rem;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    
-    .gallery-item:hover .gallery-overlay {
-      transform: translateY(0);
-    }
-  </style>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="js/main.js" defer></script>
-</head>
+      .gallery-track:hover {
+        animation-play-state: paused;
+      }
 
-<body id="home" class="flex flex-col h-full bg-black bg-cover bg-fixed bg-no-repeat bg-center font-inter text-base" style="background-image: url('img/funeral in my brain-2.jpeg')">
-  <nav class="m-0 sticky top-0 flex justify-center animate-slideIn">
-    <div class="container max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
-      <a href="#home" class="flex items-center">
-        <img src="img/logo/arfiaa-studio.svg" alt="Arfiaa Studio" class="h-8 w-auto">
+      .gallery-item {
+        position: relative;
+        width: 300px;
+        margin: 0 0.5rem;
+        flex-shrink: 0;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 1rem;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        transform: translateY(0);
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 1.5rem 0;
+      }
+
+      .gallery-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 3/2;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 1rem;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        transform: translateY(0);
+      }
+
+      @keyframes slideLeft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-20%);
+        }
+      }
+
+      @keyframes slideRight {
+        0% {
+          transform: translateX(-20%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .nav-blur::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%);
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 100%);
+        z-index: -1;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/main.js" defer></script>
+  </head>
+
+  <body
+    id="home"
+    class="flex flex-col h-full bg-black bg-cover bg-fixed bg-no-repeat bg-center font-inter text-base"
+    style="background-image: url('img/recent-works/portrait/funeral in my brain-2.jpeg')"
+  >
+    <nav class="m-0 sticky top-0 flex justify-center animate-slideIn">
+      <div class="w-full nav-blur relative">
+        <div class="container max-w-6xl mx-auto flex items-center justify-between px-4 py-6">
+          <a href="#home" class="flex items-center">
+            <img
+              src="img/logo/arfiaa-studio.svg"
+              alt="Arfiaa Studio"
+              class="h-8 w-auto"
+            />
+          </a>
+          <div class="hidden md:flex space-x-6">
+            <a href="#home" class="text-white hover:text-gray-200 font-inter"
+              >Home</a
+            >
+            <a
+              href="#services"
+              class="text-white hover:text-gray-200 font-inter"
+              >Services</a
+            >
+            <a
+              href="#RecentWorks"
+              class="text-white hover:text-gray-200 font-inter"
+              >Portfolio</a
+            >
+            <a
+              href="#Pricing"
+              class="text-white hover:text-gray-200 font-inter"
+              >Pricing</a
+            >
+          </div>
+          <button
+            class="md:hidden navbar-toggler text-white"
+            type="button"
+            onclick="toggleMobileMenu()"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <!-- Mobile menu -->
+        <div
+          id="mobileMenu"
+          class="hidden absolute top-full left-0 right-0 bg-black/70 backdrop-blur-sm py-2 px-4 md:hidden"
+        >
+          <div class="flex flex-col space-y-2">
+            <a href="#home" class="text-white hover:text-gray-200 font-inter"
+              >Home</a
+            >
+            <a
+              href="#services"
+              class="text-white hover:text-gray-200 font-inter"
+              >Services</a
+            >
+            <a
+              href="#RecentWorks"
+              class="text-white hover:text-gray-200 font-inter"
+              >Portfolio</a
+            >
+            <a
+              href="#Pricing"
+              class="text-white hover:text-gray-200 font-inter"
+              >Pricing</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="h-[75vh] mt-20 md:mt-20 md:pt-20 text-center">
+      <div class="container max-w-6xl mx-auto px-4">
+        <h2
+          class="text-5xl md:text-7xl font-bebas tracking-wider text-gray-100 opacity-0 animate-fadeIn animate-delay-200 drop-shadow-lg"
+        >
+          Relive Every <br />
+          Moment
+        </h2>
+      </div>
+      <div class="text-center m-20 md:p-20">
+        <a
+          id="contact-me-button"
+          class="text-center p-3 bg-[#0f0f0f]/80 backdrop-blur-sm rounded-full text-gray-100 no-underline hover:opacity-90 transition-all duration-300 text-lg font-inter opacity-0 animate-fadeIn animate-delay-400 hover:scale-105"
+          href="./html/contact.html"
+          >Contact Me</a
+        >
+      </div>
+    </section>
+
+    <section id="about" class="bg-[#171717] py-20">
+      <div
+        class="container max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center"
+      >
+        <div class="w-full md:w-1/3 p-4">
+          <img
+            src="/img/profile.jpg"
+            alt="Arfiaa Ammar"
+            class="rounded-full w-full max-w-xs mx-auto"
+          />
+        </div>
+        <div
+          class="w-full md:w-2/3 p-4 md:p-12 text-center md:text-left flex flex-col justify-center"
+        >
+          <h2
+            class="text-2xl md:text-3xl font-bebas tracking-wider mb-4 text-white"
+          >
+            Who is Arfiaa Studio ?
+          </h2>
+          <p class="text-base leading-relaxed font-inter text-white">
+            Arfiaa Studio is run by Ammar, a one man show (sometimes with a few
+            friends 😗). He's a professional photographer based in Selangor,
+            Malaysia. With over 4 years of experience, he's primarily known for
+            his portrait, events and wedding photography work in Perak and
+            Selangor area. Whether he's documenting his personal life or
+            working for his clients, he's striving to create the best photos
+            possible.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="bg-[#171717] py-20">
+      <div class="container max-w-6xl mx-auto px-4 text-gray-100">
+        <div class="text-center mb-16 opacity-0 animate-fadeIn">
+          <h2 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">
+            Our Services
+          </h2>
+          <p class="text-lg font-inter text-gray-300">
+            Capturing your precious moments with professional excellence
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+          <!-- Wedding Photography -->
+          <div
+            class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-scaleIn animate-delay-100"
+          >
+            <div class="text-center mb-6">
+              <i class="fas fa-ring text-4xl mb-4"></i>
+              <h3 class="text-2xl font-bebas tracking-wider mb-4">
+                Wedding Photography
+              </h3>
+              <p class="text-base font-inter leading-relaxed text-gray-300">
+                Documenting your special day with a perfect blend of candid
+                moments and artistic portraits. Preparation to reception,
+                we capture every detail of your wedding story.
+              </p>
+            </div>
+            <ul
+              class="text-sm font-inter text-gray-300 space-y-2 list-disc list-inside"
+            >
+              <li>Solemnisation ceremony</li>
+              <li>Reception event</li>
+              <li>Outdoor couple portraits</li>
+              <li>Family formal photos</li>
+            </ul>
+          </div>
+
+          <!-- Event Photography -->
+          <div
+            class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-scaleIn animate-delay-500"
+          >
+            <div class="text-center mb-6">
+              <i class="fas fa-birthday-cake text-4xl mb-4"></i>
+              <h3 class="text-2xl font-bebas tracking-wider mb-4">
+                Event Photography
+              </h3>
+              <p class="text-base font-inter leading-relaxed text-gray-300">
+                Event photography sessions charged by the hour. Perfect for
+                corporate events, weddings, and graduations. Each session
+                includes professional editing and softcopy.
+              </p>
+            </div>
+            <ul
+              class="text-sm font-inter text-gray-300 space-y-2 list-disc list-inside"
+            >
+              <li>Graduation photos</li>
+              <li>Family portraits</li>
+              <li>Sports match</li>
+              <li>Birthday parties</li>
+            </ul>
+          </div>
+
+          <!-- Event Photography -->
+          <div
+            class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-scaleIn animate-delay-500"
+          >
+            <div class="text-center mb-6">
+              <i class="fas fa-calendar-alt text-4xl mb-4"></i>
+              <h3 class="text-2xl font-bebas tracking-wider mb-4">
+                Multi-Day Events
+              </h3>
+              <p class="text-base font-inter leading-relaxed text-gray-300">
+                Comprehensive coverage for extended events spanning multiple
+                days. From conferences to festivals, we ensure thorough
+                documentation of your entire event journey.
+              </p>
+            </div>
+            <ul
+              class="text-sm font-inter text-gray-300 space-y-2 list-disc list-inside"
+            >
+              <li>Corporate conferences</li>
+              <li>Multi-day festivals</li>
+              <li>Sports tournaments</li>
+              <li>Trade exhibitions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="Pricing" class="bg-[#171717] py-20">
+      <div class="container max-w-6xl mx-auto px-4">
+        <div class="text-center text-white mb-16">
+          <h1 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">
+            Our Packages
+          </h1>
+          <p class="text-lg leading-relaxed font-inter">
+            Pricing may be affected by promos and discounts. Do contact us for
+            more details.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Wedding Photography -->
+          <div class="bg-black/50 backdrop-blur-sm p-8 rounded-lg text-white">
+            <h3 class="text-yellow-400 text-2xl font-bebas mb-6">
+              Wedding Packages
+            </h3>
+            <p class="text-sm font-inter mb-8 text-gray-300">
+              Perfect for capturing your special day, from intimate
+              solemnisation ceremonies to grand wedding receptions. Our wedding
+              packages ensure every precious moment, from traditional customs to
+              candid celebrations, is beautifully preserved.
+            </p>
+
+            <div class="mb-12">
+              <h4 class="text-3xl font-bebas tracking-wider mb-2">
+                Solemnisation
+              </h4>
+              <div class="border-b border-gray-600 mb-6"></div>
+              <p class="text-3xl font-bold mb-6">RM800</p>
+              <ul class="space-y-2">
+                <li>• 50% deposit</li>
+                <li>• Shoot & burn</li>
+                <li>• Half-day coverage</li>
+                <li>• 1 photographer</li>
+                <li>• Unlimited shoot</li>
+                <li>• Outdoor photoshoot</li>
+              </ul>
+            </div>
+
+            <div class="mb-8">
+              <h4 class="text-3xl font-bebas tracking-wider mb-2">Reception</h4>
+              <div class="border-b border-gray-600 mb-6"></div>
+              <p class="text-3xl font-bold mb-6">RM1200</p>
+              <ul class="space-y-2">
+                <li>• 50% deposit</li>
+                <li>• Shoot & burn</li>
+                <li>• Coverage 5-6 hours</li>
+                <li>• 1 photographer</li>
+                <li>• Unlimited shoot</li>
+                <li>• Outdoor photoshoot</li>
+              </ul>
+            </div>
+
+            <div class="mt-4 text-yellow-400">
+              <p class="text-xl font-bold">2 EVENT COMBINED</p>
+              <p class="text-3xl font-bold">RM1500</p>
+              <p class="text-sm">(Regular price: RM2000)</p>
+            </div>
+          </div>
+
+          <!-- Portrait Photography -->
+          <div class="bg-black/50 backdrop-blur-sm p-8 rounded-lg text-white">
+            <h3 class="text-yellow-400 text-2xl font-bebas mb-6">
+              Hourly Packages
+            </h3>
+            <p class="text-sm font-inter mb-8 text-gray-300">
+              Professional portrait sessions charged by the hour. Perfect for
+              personal branding, graduation photos, family portraits, maternity
+              shoots, and corporate headshots. Each session includes
+              professional editing and digital delivery.
+            </p>
+
+            <div class="mb-12">
+              <h4 class="text-3xl font-bebas tracking-wider mb-2">
+                First 3 Hours
+              </h4>
+              <div class="border-b border-gray-600 mb-6"></div>
+              <p class="text-3xl font-bold mb-6">RM450</p>
+              <ul class="space-y-2">
+                <li>• 50% Deposit</li>
+                <li>• Shoot & Burn</li>
+                <li>• Single location</li>
+                <li>• Student Discount</li>
+                <li>• Unlimited shoot</li>
+                <li>• Same day delivery</li>
+              </ul>
+            </div>
+
+            <div class="mb-4">
+              <h4 class="text-3xl font-bebas tracking-wider mb-2">
+                More Hours (Max +3)
+              </h4>
+              <div class="border-b border-gray-600 mb-6"></div>
+              <p class="text-3xl font-bold mb-6">RM120/hour</p>
+              <ul class="space-y-2">
+                <li>• Extra location possible</li>
+                <li>• 10 more edited photos/hour</li>
+                <li>• Additional outfit changes</li>
+                <li>• 10% off each additional hour</li>
+                <li>• Eat & select</li>
+                <li>• Photo selection session</li>
+              </ul>
+            </div>
+
+            <div class="mt-8 text-yellow-400">
+              <p class="text-xl font-bold">FULL DAY PORTRAIT</p>
+              <p class="text-3xl font-bold">RM800</p>
+              <p class="text-sm">(Regular price: RM1020)</p>
+            </div>
+          </div>
+
+          <!-- Event Photography -->
+          <div class="bg-black/50 backdrop-blur-sm p-8 rounded-lg text-white">
+            <h3 class="text-yellow-400 text-2xl font-bebas mb-6">
+              Multi-Day Events
+            </h3>
+            <p class="text-sm font-inter mb-8 text-gray-300">
+              Comprehensive coverage for extended events such as conferences,
+              festivals, tournaments, exhibitions, and corporate functions.
+              Perfect for events spanning multiple days that need consistent,
+              thorough documentation.
+            </p>
+
+            <div class="mb-12">
+              <h4 class="text-3xl font-bebas tracking-wider mb-2">
+                Single Day Coverage
+              </h4>
+              <div class="border-b border-gray-600 mb-6"></div>
+              <p class="text-3xl font-bold mb-6">RM1500</p>
+              <ul class="space-y-2">
+                <li>• 50% Deposit</li>
+                <li>• 8 hours coverage</li>
+                <li>• 2-3 photographers</li>
+                <li>• All edited photos</li>
+                <li>• Digital delivery</li>
+                <li>• Same-day preview & highlight</li>
+              </ul>
+            </div>
+
+            <div class="mb-4">
+              <h4 class="text-3xl font-bebas tracking-wider mb-2">
+                Multi-Day (2+ Days)
+              </h4>
+              <div class="border-b border-gray-600 mb-6"></div>
+              <p class="text-3xl font-bold mb-6">RM1300/day</p>
+              <ul class="space-y-2">
+                <li>• One Day Deposit</li>
+                <li>• 8 hours coverage per day</li>
+                <li>• 2-3 photographers</li>
+                <li>• Digital Delivery</li>
+                <li>• Same-day preview & highlight</li>
+                <li>• RM1200/day for 3+ days</li>
+              </ul>
+            </div>
+
+            <div class="mt-8 text-yellow-400">
+              <p class="text-xl font-bold">2 DAYS EVENT PACKAGE</p>
+              <p class="text-3xl font-bold">RM2500</p>
+              <p class="text-sm">(Regular price: RM2600)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center text-white mt-12">
+          <p class="text-sm italic">
+            * All packages include basic photo editing and color correction
+          </p>
+          <p class="text-sm italic">
+            * Travel fees may apply for locations outside of Selangor
+          </p>
+          <p class="text-sm italic">* Custom packages available upon request</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#171717] py-20">
+      <div class="container max-w-5xl mx-auto px-4">
+        <div class="text-center text-white mb-16">
+          <h1 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">
+            Recent Works
+          </h1>
+          <p class="text-lg leading-relaxed italic font-inter">
+            A collection of moments captured across weddings, portraits, and events.
+          </p>
+        </div>
+   
+        <div class="gallery-container">
+          <div class="gallery-track scroll-left">
+            <!-- Portrait Photos -->
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/portrait/balqis-1.jpg"
+                alt="Portrait photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Portrait Session</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/portrait/balqis-2.jpg"
+                alt="Portrait photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Portrait Session</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/portrait/balqis-12.jpg"
+                alt="Portrait photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Portrait Session</p>
+              </div>
+            </div>
+            <!-- Duplicate images for continuous scroll -->
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/portrait/balqis-1.jpg"
+                alt="Portrait photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Portrait Session</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/portrait/balqis-2.jpg"
+                alt="Portrait photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Portrait Session</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/portrait/balqis-12.jpg"
+                alt="Portrait photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Portrait Session</p>
+              </div>
+            </div>
+          </div>
+        </div>
+   
+        <div class="gallery-container">
+          <div class="gallery-track scroll-right">
+            <!-- Wedding Photos -->
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/weddings/faten-13.jpeg"
+                alt="Wedding photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Wedding Ceremony</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/weddings/dsc_5937-2.jpg"
+                alt="Wedding photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Wedding Ceremony</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/weddings/dsc_5967.jpg"
+                alt="Wedding photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Wedding Ceremony</p>
+              </div>
+            </div>
+            <!-- Duplicate images for continuous scroll -->
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/weddings/faten-13.jpeg"
+                alt="Wedding photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Wedding Ceremony</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/weddings/dsc_5937-2.jpg"
+                alt="Wedding photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Wedding Ceremony</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/weddings/dsc_5967.jpg"
+                alt="Wedding photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Wedding Ceremony</p>
+              </div>
+            </div>
+          </div>
+        </div>
+   
+        <div class="gallery-container">
+          <div class="gallery-track scroll-left">
+            <!-- Event Photos -->
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Dinner 32-37.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Dinner 32-36.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Edited Moments-32.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Dah edit games-5.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Dah edit games-6.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+            <!-- Duplicate images for continuous scroll -->
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Dinner 32-37.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Dinner 32-36.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Edited Moments-32.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Dah edit games-5.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+            <div class="gallery-item">
+              <img
+                src="img/recent-works/events/Dah edit games-6.jpg"
+                alt="Event photography"
+                class="cursor-pointer"
+                onclick="fullscreen(this)"
+              />
+              <div class="gallery-overlay">
+                <p class="text-white font-inter text-sm">Event Coverage</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div
+      class="fixed bottom-4 right-4 flex opacity-0 animate-fadeIn animate-delay-500"
+    >
+      <div class="mt-auto mb-0">
+        <p class="text-gray-100 p-1 rounded bg-green-600 text-base font-inter">
+          Hi, let's talk in Whatsapp
+        </p>
+      </div>
+      <a href="https://wa.me/message/QYYQKYYYY3Y4B1" target="_blank">
+        <img
+          src="./img/logo/whatsapp-chat.png"
+          alt=""
+          class="w-16 h-auto hover:scale-110 transition-transform duration-100"
+        />
       </a>
-      <div class="hidden md:flex space-x-6">
-        <a href="#home" class="text-gray-800 hover:text-gray-600 font-inter">Home</a>
-        <a href="#services" class="text-gray-800 hover:text-gray-600 font-inter">Services</a>
-        <a href="#RecentWorks" class="text-gray-800 hover:text-gray-600 font-inter">Portfolio</a>
-        <a href="#Pricing" class="text-gray-800 hover:text-gray-600 font-inter">Pricing</a>
-      </div>
-      <button class="md:hidden navbar-toggler" type="button" onclick="toggleMobileMenu()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
     </div>
-    <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden absolute top-full left-0 right-0 bg-[#C7C7C7] py-2 px-4 md:hidden">
-      <div class="flex flex-col space-y-2">
-        <a href="#home" class="text-gray-800 hover:text-gray-600 font-inter">Home</a>
-        <a href="#services" class="text-gray-800 hover:text-gray-600 font-inter">Services</a>
-        <a href="#RecentWorks" class="text-gray-800 hover:text-gray-600 font-inter">Portfolio</a>
-        <a href="#Pricing" class="text-gray-800 hover:text-gray-600 font-inter">Pricing</a>
-      </div>
-    </div>
-  </nav>
 
-  <section class="h-[75vh] mt-20 md:mt-20 md:pt-20 text-center">
-    <div class="container max-w-6xl mx-auto px-4">
-      <h2 class="text-5xl md:text-7xl font-bebas tracking-wider text-gray-100 opacity-0 animate-fadeIn animate-delay-200 drop-shadow-lg">
-        Relive Every <br />
-        Moment
-      </h2>
-    </div>
-    <div class="text-center m-20 md:p-20">
-      <a id="contact-me-button" class="text-center p-3 bg-[#0f0f0f]/80 backdrop-blur-sm rounded-full text-gray-100 no-underline hover:opacity-90 transition-all duration-300 text-lg font-inter opacity-0 animate-fadeIn animate-delay-400 hover:scale-105" href="./html/contact.html">Contact Me</a>
-    </div>
-  </section>
-
-  <section id="about" class="bg-[#171717] py-20">
-    <div class="container max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center">
-      <div class="w-full md:w-1/3 p-4">
-        <img src="/img/profile.jpg" alt="Arfiaa Ammar" class="rounded-full w-full max-w-xs mx-auto" />
-      </div>
-      <div class="w-full md:w-2/3 p-4 md:p-12 text-center md:text-left flex flex-col justify-center">
-        <h2 class="text-2xl md:text-3xl font-bebas tracking-wider mb-4 text-white">Who is Arfiaa Studio ?</h2>
-        <p class="text-base leading-relaxed font-inter text-white">
-          Arfiaa Studio is run by Ammar, a one man show (sometimes with a few friends 😗). He's a professional
-          photographer based in Selangor, Malaysia. With over 4 years of experience, I am primarily known for my
-          portrait, events and wedding photography work in Perak and Selangor area. Whether I'm documenting my personal
-          life or working for my clients, I'm striving to create the best photos possible.
-        </p>
-        <div class="flex items-center justify-center md:justify-start space-x-4 mt-6">
-          <a href="https://www.instagram.com/arfiaa_studio/" class="hover:scale-110 transition-transform duration-100" target="_blank" rel="noopener noreferrer">
-            <img src="/img/logo/instagram.svg" alt="Instagram" class="w-8 h-8" />
-          </a>
-          <a href="https://wa.me/60139855967" class="hover:scale-110 transition-transform duration-100" target="_blank" rel="noopener noreferrer">
-            <img src="/img/logo/whatsapp.svg" alt="WhatsApp" class="w-8 h-8" />
+    <footer
+      id="footer"
+      class="bg-gray-100 text-center mt-auto py-3 opacity-0 animate-fadeIn"
+    >
+      <div class="container max-w-6xl mx-auto px-4 mt-4">
+        <div class="w-full md:w-full">
+          <p class="text-base font-inter">
+            This page is powered by
+            <a
+              href="https://arfiaa-media.com"
+              class="no-underline text-black font-bold"
+              >ARFIAA Media</a
+            >
+          </p>
+        </div>
+        <div class="w-full md:w-full p-3 pt-4">
+          <a
+            href="https://www.instagram.com/arfiaa_studio/"
+            class="hover:scale-110 transition-transform duration-100 inline-block"
+            target="_blank"
+          >
+            <img src="/img/logo/instagram.svg" alt="" class="w-8 mr-4" />
           </a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="services" class="bg-[#171717] py-20">
-    <div class="container max-w-6xl mx-auto px-4 text-gray-100">
-      <div class="text-center mb-16 opacity-0 animate-fadeIn">
-        <h2 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">Our Services</h2>
-        <p class="text-lg font-inter text-gray-300">Capturing your precious moments with professional excellence</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
-        <!-- Wedding Photography -->
-        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-scaleIn animate-delay-100">
-          <div class="text-center mb-6">
-            <i class="fas fa-ring text-4xl mb-4"></i>
-            <h3 class="text-2xl font-bebas tracking-wider mb-4">Wedding Photography</h3>
-            <p class="text-base font-inter leading-relaxed text-gray-300">
-              Documenting your special day with a perfect blend of candid moments and artistic portraits. From preparation
-              to reception, we capture every detail of your wedding story.
-            </p>
-          </div>
-          <ul class="text-sm font-inter text-gray-300 space-y-2 list-disc list-inside">
-            <li>Solemnisation ceremony</li>
-            <li>Reception event</li>
-            <li>Outdoor couple portraits</li>
-            <li>Family formal photos</li>
-          </ul>
-        </div>
-
-        <!-- Event Photography -->
-        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-scaleIn animate-delay-500">
-          <div class="text-center mb-6">
-            <i class="fas fa-birthday-cake text-4xl mb-4"></i>
-            <h3 class="text-2xl font-bebas tracking-wider mb-4">Event Photography</h3>
-            <p class="text-base font-inter leading-relaxed text-gray-300">
-              Event photography sessions charged by the hour. Perfect for corporate events, weddings, and graduations. Each session includes professional editing and softcopy.
-            </p>
-          </div>
-          <ul class="text-sm font-inter text-gray-300 space-y-2 list-disc list-inside">
-            <li>Graduation photos</li>
-            <li>Family portraits</li>
-            <li>Sports match</li>
-            <li>Birthday parties</li>
-          </ul>
-        </div>
-
-        <!-- Event Photography -->
-        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-scaleIn animate-delay-500">
-          <div class="text-center mb-6">
-            <i class="fas fa-calendar-alt text-4xl mb-4"></i>
-            <h3 class="text-2xl font-bebas tracking-wider mb-4">Multi-Day Events</h3>
-            <p class="text-base font-inter leading-relaxed text-gray-300">
-              Comprehensive coverage for extended events spanning multiple days. From conferences to festivals,
-              we ensure thorough documentation of your entire event journey.
-            </p>
-          </div>
-          <ul class="text-sm font-inter text-gray-300 space-y-2 list-disc list-inside">
-            <li>Corporate conferences</li>
-            <li>Multi-day festivals</li>
-            <li>Sports tournaments</li>
-            <li>Trade exhibitions</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="Pricing" class="bg-[#171717] py-20">
-    <div class="container max-w-6xl mx-auto px-4">
-      <div class="text-center text-white mb-16">
-        <h1 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">Our Packages</h1>
-        <p class="text-lg leading-relaxed font-inter">
-          Pricing may be affected by promos and discounts. Do contact us for more details.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Wedding Photography -->
-        <div class="bg-black/50 backdrop-blur-sm p-8 rounded-lg text-white">
-          <h3 class="text-yellow-400 text-2xl font-bebas mb-6">Wedding Packages</h3>
-          <p class="text-sm font-inter mb-8 text-gray-300">
-            Perfect for capturing your special day, from intimate solemnisation ceremonies to grand wedding receptions. Our wedding packages ensure every precious moment, from traditional customs to candid celebrations, is beautifully preserved.
+        <div class="w-full md:w-full">
+          <p class="text-base leading-relaxed font-inter">
+            We're committed in delivering our clients the best service as possible
+            to the best of our abilities.
           </p>
-          
-          <div class="mb-12">
-            <h4 class="text-3xl font-bebas tracking-wider mb-2">Solemnisation</h4>
-            <div class="border-b border-gray-600 mb-6"></div>
-            <p class="text-3xl font-bold mb-6">RM800</p>
-            <ul class="space-y-2">
-              <li>• 50% deposit</li>
-              <li>• Shoot & burn</li>
-              <li>• Half-day coverage</li>
-              <li>• 1 photographer</li>
-              <li>• Unlimited shoot</li>
-              <li>• Outdoor photoshoot</li>
-            </ul>
-          </div>
-
-          <div class="mb-8">
-            <h4 class="text-3xl font-bebas tracking-wider mb-2">Reception</h4>
-            <div class="border-b border-gray-600 mb-6"></div>
-            <p class="text-3xl font-bold mb-6">RM1200</p>
-            <ul class="space-y-2">
-              <li>• 50% deposit</li>
-              <li>• Shoot & burn</li>
-              <li>• Coverage 5-6 hours</li>
-              <li>• 1 photographer</li>
-              <li>• Unlimited shoot</li>
-              <li>• Outdoor photoshoot</li>
-            </ul>
-          </div>
-
-          <div class="mt-4 text-yellow-400">
-            <p class="text-xl font-bold">2 EVENT COMBINED</p>
-            <p class="text-3xl font-bold">RM1500</p>
-            <p class="text-sm">(Regular price: RM2000)</p>
-          </div>
-        </div>
-
-        <!-- Portrait Photography -->
-        <div class="bg-black/50 backdrop-blur-sm p-8 rounded-lg text-white">
-          <h3 class="text-yellow-400 text-2xl font-bebas mb-6">Hourly Packages</h3>
-          <p class="text-sm font-inter mb-8 text-gray-300">
-            Professional portrait sessions charged by the hour. Perfect for personal branding, graduation photos, family portraits, maternity shoots, and corporate headshots. Each session includes professional editing and digital delivery.
-          </p>
-          
-          <div class="mb-12">
-            <h4 class="text-3xl font-bebas tracking-wider mb-2">First 3 Hours</h4>
-            <div class="border-b border-gray-600 mb-6"></div>
-            <p class="text-3xl font-bold mb-6">RM450</p>
-            <ul class="space-y-2">
-              <li>• 50% Deposit</li>
-              <li>• Shoot & Burn</li>
-              <li>• Single location</li>
-              <li>• Student Discount</li>
-              <li>• Unlimited shoot</li>
-              <li>• Same day delivery</li>
-            </ul>
-          </div>
-
-          <div class="mb-4">
-            <h4 class="text-3xl font-bebas tracking-wider mb-2">More Hours (Max +3)</h4>
-            <div class="border-b border-gray-600 mb-6"></div>
-            <p class="text-3xl font-bold mb-6">RM120/hour</p>
-            <ul class="space-y-2">
-              <li>• Extra location possible</li>
-              <li>• 10 more edited photos/hour</li>
-              <li>• Additional outfit changes</li>
-              <li>• 10% off each additional hour</li>
-              <li>• Eat & select</li>
-              <li>• Photo selection session</li>
-            </ul>
-          </div>
-
-          <div class="mt-8 text-yellow-400">
-            <p class="text-xl font-bold">FULL DAY PORTRAIT</p>
-            <p class="text-3xl font-bold">RM800</p>
-            <p class="text-sm">(Regular price: RM1020)</p>
-          </div>
-        </div>
-
-        <!-- Event Photography -->
-        <div class="bg-black/50 backdrop-blur-sm p-8 rounded-lg text-white">
-          <h3 class="text-yellow-400 text-2xl font-bebas mb-6">Multi-Day Events</h3>
-          <p class="text-sm font-inter mb-8 text-gray-300">
-            Comprehensive coverage for extended events such as conferences, festivals, tournaments, exhibitions, and corporate functions. Perfect for events spanning multiple days that need consistent, thorough documentation.
-          </p>
-          
-          <div class="mb-12">
-            <h4 class="text-3xl font-bebas tracking-wider mb-2">Single Day Coverage</h4>
-            <div class="border-b border-gray-600 mb-6"></div>
-            <p class="text-3xl font-bold mb-6">RM1500</p>
-            <ul class="space-y-2">
-              <li>• 50% Deposit</li>
-              <li>• 8 hours coverage</li>
-              <li>• 2-3 photographers</li>
-              <li>• All edited photos</li>
-              <li>• Digital delivery</li>
-              <li>• Same-day preview & highlight</li>
-            </ul>
-          </div>
-
-          <div class="mb-4">
-            <h4 class="text-3xl font-bebas tracking-wider mb-2">Multi-Day (2+ Days)</h4>
-            <div class="border-b border-gray-600 mb-6"></div>
-            <p class="text-3xl font-bold mb-6">RM1300/day</p>
-            <ul class="space-y-2">
-              <li>• One Day Deposit</li>
-              <li>• 8 hours coverage per day</li>
-              <li>• 2-3 photographers</li>
-              <li>• Digital Delivery</li>
-              <li>• Same-day preview & highlight</li>
-              <li>• RM1200/day for 3+ days</li>
-            </ul>
-          </div>
-
-          <div class="mt-8 text-yellow-400">
-            <p class="text-xl font-bold">2 DAYS EVENT PACKAGE</p>
-            <p class="text-3xl font-bold">RM2500</p>
-            <p class="text-sm">(Regular price: RM2600)</p>
-          </div>
         </div>
       </div>
+    </footer>
 
-      <div class="text-center text-white mt-12">
-        <p class="text-sm italic">* All packages include basic photo editing and color correction</p>
-        <p class="text-sm italic">* Travel fees may apply for locations outside Klang Valley</p>
-        <p class="text-sm italic">* Custom packages available upon request</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="RecentWorks" class="bg-[#171717]">
-    <div class="container max-w-5xl mx-auto px-4 my-20 lg:my-20 lg:py-20">
-      <div class="text-center text-white mb-16">
-        <h1 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">Recent Works</h1>
-        <p class="text-lg leading-relaxed italic font-inter">
-          A collection of moments captured across weddings, portraits, and events.
-        </p>
-      </div>
-
-      <div class="gallery-container">
-        <div class="gallery-track scroll-left">
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-6.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Wedding ceremony</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-5.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Portrait session</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-2.jpeg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Event coverage</p>
-            </div>
-          </div>
-          <!-- Duplicate images for continuous scroll -->
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-6.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Wedding ceremony</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-5.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Portrait session</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-2.jpeg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Event coverage</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="gallery-container mt-4">
-        <div class="gallery-track scroll-right">
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-6.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Wedding ceremony</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-5.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Portrait session</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-2.jpeg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Event coverage</p>
-            </div>
-          </div>
-          <!-- Duplicate images for continuous scroll -->
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-6.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Wedding ceremony</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-5.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Portrait session</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-2.jpeg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Event coverage</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="gallery-container mt-4">
-        <div class="gallery-track scroll-left">
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-6.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Wedding ceremony</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-5.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Portrait session</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-2.jpeg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Event coverage</p>
-            </div>
-          </div>
-          <!-- Duplicate images for continuous scroll -->
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-6.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Wedding ceremony</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-5.jpg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Portrait session</p>
-            </div>
-          </div>
-          <div class="gallery-item">
-            <img src="img/funeral in my brain-2.jpeg" alt="Photography portfolio" class="cursor-pointer" onclick="fullscreen(this)" />
-            <div class="gallery-overlay">
-              <p class="text-white font-inter text-sm">Event coverage</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="fixed bottom-4 right-4 flex opacity-0 animate-fadeIn animate-delay-500">
-    <div class="mt-auto mb-0">
-      <p class="text-gray-100 p-1 rounded bg-green-600 text-base font-inter">Hi, let's talk in Whatsapp</p>
-    </div>
-    <a href="https://wa.me/message/QYYQKYYYY3Y4B1" target="_blank">
-      <img src="./img/logo/whatsapp-chat.png" alt="" class="w-16 h-auto hover:scale-110 transition-transform duration-100" />
-    </a>
-  </div>
-
-  <footer id="footer" class="bg-gray-100 text-center mt-auto py-3 opacity-0 animate-fadeIn">
-    <div class="container max-w-6xl mx-auto px-4 mt-4">
-      <div class="w-full md:w-full">
-        <p class="text-base font-inter">In collaboration with <a href="https://arfiaa-media.com" class="no-underline text-black font-bold">ARFIAA Media</a></p>
-      </div>
-      <div class="w-full md:w-full p-3 pt-4">
-        <a href="https://www.instagram.com/arfiaa_studio/" class="hover:scale-110 transition-transform duration-100 inline-block" target="_blank">
-          <img src="/img/logo/instagram.svg" alt="" class="w-8 mr-4" />
-        </a>
-      </div>
-      <div class="w-full md:w-full">
-        <p class="text-base leading-relaxed font-inter">
-          I am committed in delivering my clients the best service as possible to the best of my abilities.
-        </p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js" defer></script>
-</body>
+    <script src="js/main.js" defer></script>
+  </body>
 </html>
