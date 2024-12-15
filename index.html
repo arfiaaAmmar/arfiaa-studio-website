@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full scroll-smooth">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -17,57 +17,197 @@
             'bebas': ['"Bebas Neue"', 'sans-serif'],
             'inter': ['Inter', 'sans-serif'],
           },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            slideIn: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(0)' }
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.9)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' }
+            }
+          },
+          animation: {
+            fadeIn: 'fadeIn 0.8s ease-out forwards',
+            slideIn: 'slideIn 0.8s ease-out forwards',
+            scaleIn: 'scaleIn 0.6s ease-out forwards'
+          }
         },
       },
     }
   </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <style>
+    .animate-delay-100 { animation-delay: 100ms; }
+    .animate-delay-200 { animation-delay: 200ms; }
+    .animate-delay-300 { animation-delay: 300ms; }
+    .animate-delay-400 { animation-delay: 400ms; }
+    .animate-delay-500 { animation-delay: 500ms; }
+    
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .gallery-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+
+    .gallery-track {
+      display: flex;
+      width: fit-content;
+    }
+
+    .scroll-left {
+      animation: scrollLeft 30s linear infinite;
+    }
+
+    .scroll-right {
+      animation: scrollRight 30s linear infinite;
+    }
+
+    .gallery-track:hover {
+      animation-play-state: paused;
+    }
+    
+    .gallery-item {
+      position: relative;
+      width: 300px;
+      margin: 0 1rem;
+      flex-shrink: 0;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-rows: repeat(2, 1fr);
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+    }
+
+    .gallery-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/2;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="js/main.js" defer></script>
 </head>
 
-<body id="home" class="flex flex-col h-full bg-black bg-cover bg-fixed bg-no-repeat bg-center font-inter text-base" style="background-image: url('/img/cover.jpg')">
-  <nav class="bg-gray-100 m-0 sticky top-0 flex justify-center">
+<body id="home" class="flex flex-col h-full bg-black bg-cover bg-fixed bg-no-repeat bg-center font-inter text-base" style="background-image: url('img/funeral in my brain-2.jpeg')">
+  <nav class="m-0 sticky top-0 flex justify-center animate-slideIn">
     <div class="container max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
-      <h4 class="text-2xl font-bebas tracking-wider">Arfiaa Studio</h4>
-      <button class="navbar-toggler ml-auto" type="button" data-mdb-toggle="collapse"
-        data-mdb-target="#navbarToggleExternalContent3" aria-controls="navbarToggleExternalContent3"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
+      <a href="#home" class="flex items-center">
+        <img src="img/logo/arfiaa-studio.svg" alt="Arfiaa Studio" class="h-8 w-auto">
+      </a>
+      <div class="hidden md:flex space-x-6">
+        <a href="#home" class="text-gray-800 hover:text-gray-600 font-inter">Home</a>
+        <a href="#services" class="text-gray-800 hover:text-gray-600 font-inter">Services</a>
+        <a href="#WeddingGallery" class="text-gray-800 hover:text-gray-600 font-inter">Weddings</a>
+        <a href="#PortraitGallery" class="text-gray-800 hover:text-gray-600 font-inter">Portraits</a>
+      </div>
+      <button class="md:hidden navbar-toggler" type="button" onclick="toggleMobileMenu()">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
       </button>
     </div>
-    <div class="collapse" id="navbarToggleExternalContent3">
-      <div class="bg-gray-100 p-4">
-        <button class="w-full text-left px-4 py-2 border-b hover:bg-gray-200 transition-colors">
-          <a href="./index.html" class="text-black no-underline text-lg font-inter">Home</a>
-        </button>
-        <button class="w-full text-left px-4 py-2 border-b hover:bg-gray-200 transition-colors">
-          <a href="./contact.html" class="text-black no-underline text-lg font-inter">Contact</a>
-        </button>
-        <button class="w-full text-left px-4 py-2 border-b hover:bg-gray-200 transition-colors">
-          <a href="./portfolio.html" class="text-black no-underline text-lg font-inter">Portfolio</a>
-        </button>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden absolute top-full left-0 right-0 bg-[#C7C7C7] py-2 px-4 md:hidden">
+      <div class="flex flex-col space-y-2">
+        <a href="#home" class="text-gray-800 hover:text-gray-600 font-inter">Home</a>
+        <a href="#services" class="text-gray-800 hover:text-gray-600 font-inter">Services</a>
+        <a href="#WeddingGallery" class="text-gray-800 hover:text-gray-600 font-inter">Weddings</a>
+        <a href="#PortraitGallery" class="text-gray-800 hover:text-gray-600 font-inter">Portraits</a>
       </div>
     </div>
   </nav>
 
   <section class="h-[75vh] mt-20 md:mt-20 md:pt-20 text-center">
     <div class="container max-w-6xl mx-auto px-4">
-      <h2 class="text-5xl md:text-7xl font-bebas tracking-wider text-gray-100">
+      <h2 class="text-5xl md:text-7xl font-bebas tracking-wider text-gray-100 opacity-0 animate-fadeIn animate-delay-200 drop-shadow-lg">
         Relive Every <br />
         Moment
       </h2>
     </div>
     <div class="text-center m-20 md:p-20">
-      <a id="contact-me-button" class="text-center p-3 bg-[#0f0f0f] rounded-full text-gray-100 no-underline hover:opacity-90 transition-opacity duration-100 text-lg font-inter" href="./html/contact.html">Contact Me</a>
+      <a id="contact-me-button" class="text-center p-3 bg-[#0f0f0f]/80 backdrop-blur-sm rounded-full text-gray-100 no-underline hover:opacity-90 transition-all duration-300 text-lg font-inter opacity-0 animate-fadeIn animate-delay-400 hover:scale-105" href="./html/contact.html">Contact Me</a>
     </div>
   </section>
 
-  <section id="about-me" class="bg-black pt-4 lg:p-20">
+  <section id="about-me" class="bg-black pt-4 lg:p-20 opacity-0 animate-fadeIn animate-delay-200">
     <div class="container max-w-6xl mx-auto px-4 text-gray-100 md:flex">
       <div class="w-1/2 md:w-1/3 lg:w-1/4 mx-auto">
-        <img src="/img/profile.jpg" alt="" class="rounded-full w-full" />
+        <img src="/img/profile.jpg" alt="Arfiaa Ammar" class="rounded-full w-full" />
       </div>
       <div class="w-full md:w-2/3 p-4 sm:p-20 text-center">
         <h2 class="text-3xl md:text-4xl font-bebas tracking-wider mb-6">Who is Arfiaa Ammar ?</h2>
@@ -85,14 +225,14 @@
 
   <section id="services" class="bg-[#171717] py-20">
     <div class="container max-w-6xl mx-auto px-4 text-gray-100">
-      <div class="text-center mb-16">
+      <div class="text-center mb-16 opacity-0 animate-fadeIn">
         <h2 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">Our Services</h2>
         <p class="text-lg font-inter text-gray-300">Capturing your precious moments with professional excellence</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
         <!-- Wedding Photography -->
-        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300">
+        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-scaleIn animate-delay-100">
           <div class="text-center mb-6">
             <i class="fas fa-ring text-4xl mb-4"></i>
             <h3 class="text-2xl font-bebas tracking-wider mb-4">Wedding Photography</h3>
@@ -110,7 +250,7 @@
         </div>
 
         <!-- Portrait Photography -->
-        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300">
+        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-scaleIn animate-delay-300">
           <div class="text-center mb-6">
             <i class="fas fa-camera text-4xl mb-4"></i>
             <h3 class="text-2xl font-bebas tracking-wider mb-4">Portrait Photography</h3>
@@ -128,7 +268,7 @@
         </div>
 
         <!-- Event Photography -->
-        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300">
+        <div class="bg-black/50 p-8 rounded-lg backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-scaleIn animate-delay-500">
           <div class="text-center mb-6">
             <i class="fas fa-calendar-alt text-4xl mb-4"></i>
             <h3 class="text-2xl font-bebas tracking-wider mb-4">Event Photography</h3>
@@ -150,29 +290,97 @@
 
   <section id="WeddingGallery" class="bg-[#171717]">
     <div class="container max-w-5xl mx-auto px-4 mt-20 lg:mt-20 lg:pt-20">
-      <div class="text-center text-white">
+      <div class="text-center text-white mb-16">
         <h1 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">Weddings</h1>
-        <br />
         <p class="text-lg leading-relaxed italic font-inter">
           "I love you, not only for what you are, but for what I am when I
           am with you. I love you, not only for what you have made of
           yourself but for what you are making of me."
         </p>
-        <br />
-        <p class="text-base font-inter">~ Roy Croft ~</p>
+        <p class="text-base font-inter mt-4">~ Roy Croft ~</p>
       </div>
-      <div id="highlight-img">
-        <img src="img/DSC_5937-2.jpg" id="current-wed" class="h-full w-full cursor-pointer" onclick="fullscreen(this)" />
+      
+      <div class="gallery-container">
+        <div class="gallery-track scroll-left">
+          <div class="gallery-item">
+            <img src="img/dsc_5937-2.jpg" alt="Wedding photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Beautiful wedding ceremony capture</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/faten-13.jpeg" alt="Wedding photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Elegant bridal portrait</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/dsc_2779-2.jpg" alt="Wedding photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Candid wedding moments</p>
+            </div>
+          </div>
+          <!-- Duplicate images for continuous scroll -->
+          <div class="gallery-item">
+            <img src="img/dsc_5937-2.jpg" alt="Wedding photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Beautiful wedding ceremony capture</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/faten-13.jpeg" alt="Wedding photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Elegant bridal portrait</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/dsc_2779-2.jpg" alt="Wedding photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Candid wedding moments</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="flex">
-        <div class="w-1/3">
-          <img src="img/Faten-13.jpeg" class="h-full w-full cursor-pointer" alt="" onclick="selectedPhoto(this, '#current-wed')" />
-        </div>
-        <div class="w-1/3">
-          <img src="img/DSC_2779-2.jpg" class="h-full w-full cursor-pointer" alt="" onclick="selectedPhoto(this, '#current-wed')" />
-        </div>
-        <div class="w-1/3">
-          <img src="img/DSC_5967.jpg" class="h-full w-full cursor-pointer" alt="" onclick="selectedPhoto(this, '#current-wed')" />
+
+      <div class="gallery-container mt-8">
+        <div class="gallery-track scroll-right">
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-6.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Artistic portrait photography</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-5.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Creative portrait session</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-2.jpeg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Expressive portraiture</p>
+            </div>
+          </div>
+          <!-- Duplicate images for continuous scroll -->
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-6.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Artistic portrait photography</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-5.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Creative portrait session</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-2.jpeg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Expressive portraiture</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -180,39 +388,104 @@
 
   <section id="PortraitGallery" class="bg-[#171717]">
     <div class="container max-w-5xl mx-auto px-4 my-20 lg:my-20 lg:py-20">
-      <div class="text-center text-white">
+      <div class="text-center text-white mb-16">
         <h1 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">Portraits</h1>
-        <br />
         <p class="text-lg leading-relaxed italic font-inter">
           "To me, photography is an art of observation. It's about finding
           something interesting in an ordinary place… I've found it has
           little to do with the things you see and everything to do with
           the way you see them."
         </p>
-        <br />
-        <p class="text-base font-inter">~ Elliott Erwitt ~</p>
+        <p class="text-base font-inter mt-4">~ Elliott Erwitt ~</p>
       </div>
-      <div>
-        <img src="img/Funeral in My Brain-6.jpg" id="current-portrait" class="h-full w-full cursor-pointer" onclick="fullscreen(this)" />
+
+      <div class="gallery-container">
+        <div class="gallery-track scroll-left">
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-6.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Artistic portrait photography</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-5.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Creative portrait session</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-2.jpeg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Expressive portraiture</p>
+            </div>
+          </div>
+          <!-- Duplicate images for continuous scroll -->
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-6.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Artistic portrait photography</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-5.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Creative portrait session</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-2.jpeg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Expressive portraiture</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="flex">
-        <div class="w-1/3">
-          <img src="img/Funeral in My Brain-5.jpg" class="h-full w-full cursor-pointer" alt=""
-            onclick="selectedPhoto(this, '#current-portrait')" />
-        </div>
-        <div class="w-1/3">
-          <img src="img/Funeral in My Brain-2.jpeg" class="h-full w-full cursor-pointer" alt=""
-            onclick="selectedPhoto(this, '#current-portrait')" />
-        </div>
-        <div class="w-1/3">
-          <img src="img/Funeral in My Brain-14.jpeg" class="h-full w-full cursor-pointer" alt=""
-            onclick="selectedPhoto(this, '#current-portrait')" />
+
+      <div class="gallery-container mt-8">
+        <div class="gallery-track scroll-right">
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-6.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Artistic portrait photography</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-5.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Creative portrait session</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-2.jpeg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Expressive portraiture</p>
+            </div>
+          </div>
+          <!-- Duplicate images for continuous scroll -->
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-6.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Artistic portrait photography</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-5.jpg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Creative portrait session</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="img/funeral in my brain-2.jpeg" alt="Portrait photo" class="cursor-pointer" onclick="fullscreen(this)" />
+            <div class="gallery-overlay">
+              <p class="text-white font-inter text-sm">Expressive portraiture</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="fixed bottom-4 right-4 flex">
+  <div class="fixed bottom-4 right-4 flex opacity-0 animate-fadeIn animate-delay-500">
     <div class="mt-auto mb-0">
       <p class="text-gray-100 p-1 rounded bg-green-600 text-base font-inter">Hi, let's talk in Whatsapp</p>
     </div>
@@ -221,7 +494,7 @@
     </a>
   </div>
 
-  <footer id="footer" class="bg-gray-100 text-center mt-auto py-3">
+  <footer id="footer" class="bg-gray-100 text-center mt-auto py-3 opacity-0 animate-fadeIn">
     <div class="container max-w-6xl mx-auto px-4 mt-4">
       <div class="w-full md:w-full">
         <p class="text-base font-inter">In collaboration with <a href="https://arfiaa-media.com" class="no-underline text-black font-bold">ARFIAA Media</a></p>
@@ -245,14 +518,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-
-  <!-- Vendor -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-  </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
-
 </html>

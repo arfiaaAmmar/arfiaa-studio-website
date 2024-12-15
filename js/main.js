@@ -8,6 +8,23 @@ $(function () {
 
 // ---------------------------------------------------------------- Mobile menu toggle -------------------------------- //
 
+// Mobile menu toggle
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById('mobileMenu');
+  mobileMenu.classList.toggle('hidden');
+}
+
+// Close mobile menu when clicking a link
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileLinks = mobileMenu.getElementsByTagName('a');
+  
+  Array.from(mobileLinks).forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  });
+});
 
 (function () {
   [...document.querySelectorAll(".control")].forEach(button => {
@@ -67,3 +84,47 @@ function filmHighlight() {
     });
   });
 }
+
+// Fullscreen image viewer
+function fullscreen(img) {
+  const viewer = document.createElement('div');
+  viewer.className = 'fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50';
+  
+  const image = document.createElement('img');
+  image.src = img.src;
+  image.className = 'max-h-[90vh] max-w-[90vw] object-contain';
+  
+  viewer.appendChild(image);
+  
+  viewer.addEventListener('click', () => {
+    viewer.remove();
+  });
+  
+  document.body.appendChild(viewer);
+}
+
+// Initialize animations when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Remove initial opacity-0 from body after a small delay
+  setTimeout(() => {
+    document.body.classList.remove('opacity-0');
+  }, 100);
+
+  // Set up intersection observer for fade-in and slide animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '50px'
+  });
+
+  // Observe all elements with opacity-0 class
+  document.querySelectorAll('.opacity-0').forEach((el) => {
+    observer.observe(el);
+  });
+});
