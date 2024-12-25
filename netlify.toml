@@ -1,8 +1,4 @@
 [[plugins]]
-package = "@netlify/plugin-nextjs"
-
-# Enable Netlify Image CDN
-[[plugins]]
 package = "@netlify/plugin-lighthouse"
 
 [build]
