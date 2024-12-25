@@ -1,0 +1,21 @@
+[[plugins]]
+package = "@netlify/plugin-nextjs"
+
+# Enable Netlify Image CDN
+[[plugins]]
+package = "@netlify/plugin-lighthouse"
+
+[build]
+publish = "/"
+
+# Image optimization settings
+[[redirects]]
+from = "/img/*"
+to = "/.netlify/images/:splat"
+status = 200
+
+[build.processing]
+skip_processing = false
+
+[build.processing.images]
+compress = true
