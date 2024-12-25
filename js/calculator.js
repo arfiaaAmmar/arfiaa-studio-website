@@ -2,6 +2,7 @@ function updatePackageVisibility() {
     const packageType = document.getElementById('package-type').value;
     const weddingOptions = document.getElementById('wedding-options');
     const hourlyOptions = document.getElementById('hourly-options');
+    const extraHoursContainer = document.getElementById('extra-hours-container');
 
     // Hide all package options first
     weddingOptions.classList.add('hidden');
@@ -12,26 +13,22 @@ function updatePackageVisibility() {
         weddingOptions.classList.remove('hidden');
     } else if (packageType === 'hourly') {
         hourlyOptions.classList.remove('hidden');
+        
+        // Show/hide extra hours based on package selection
+        const hourlyBase = document.getElementById('hourly-base').value;
+        if (hourlyBase === 'fullday') {
+            extraHoursContainer.classList.add('hidden');
+        } else {
+            extraHoursContainer.classList.remove('hidden');
+        }
     }
 
     calculateTotal();
 }
 
-function calculateHourlyRate(extraHours) {
-    let total = 0;
-    for (let i = 1; i <= extraHours; i++) {
-        // Apply 10% discount for each additional hour
-        const discount = 0.1 * i;
-        const hourRate = 150 * (1 - discount);
-        total += hourRate;
-    }
-    return total;
-}
-
 function calculateTotal() {
     const packageType = document.getElementById('package-type').value;
     const location = document.getElementById('location').value;
-    const additionalPhotographers = parseInt(document.getElementById('photographers').value) || 0;
     let total = 0;
     let breakdown = [];
     let subtotal = 0;
@@ -58,49 +55,63 @@ function calculateTotal() {
         }
     } else if (packageType === 'hourly') {
         const hourlyBase = document.getElementById('hourly-base').value;
-        const extraHours = parseInt(document.getElementById('extra-hours').value) || 0;
         const isStudent = document.getElementById('student-discount').checked;
 
         if (hourlyBase === 'base') {
             // Add base package cost (First 3 Hours)
-            subtotal = 550;
+            subtotal = 500;
             
-            // Calculate additional hours with progressive discount
+            // Calculate additional hours
+            const extraHours = parseInt(document.getElementById('extra-hours').value) || 0;
             if (extraHours > 0) {
-                const extraCost = calculateHourlyRate(extraHours);
+                const extraCost = extraHours * 150; // Flat rate of RM150 per hour
                 subtotal += extraCost;
+                breakdown.push({
+                    item: `Base Package (3 Hours)`,
+                    cost: 500
+                });
+                breakdown.push({
+                    item: `Additional ${extraHours} Hour${extraHours > 1 ? 's' : ''}`,
+                    cost: extraCost
+                });
+            } else {
+                breakdown.push({
+                    item: 'Base Package (3 Hours)',
+                    cost: subtotal
+                });
             }
 
             // Apply student discount if applicable
             if (isStudent) {
-                const discount = subtotal * 0.1;
+                const discount = subtotal * 0.2; // 20% student discount
                 breakdown.push({
-                    item: 'Base Package + Additional Hours',
-                    cost: Math.round(subtotal)
-                });
-                breakdown.push({
-                    item: 'Student Discount (10%)',
+                    item: 'Student Discount (20%)',
                     cost: -Math.round(discount)
                 });
                 total += subtotal - discount;
             } else {
                 total += subtotal;
+            }
+        } else if (hourlyBase === 'fullday') {
+            // Full day package (8 hours)
+            subtotal = 1000;
+            breakdown.push({
+                item: 'Full Day Package (8 Hours)',
+                cost: subtotal
+            });
+
+            // Apply student discount if applicable
+            if (isStudent) {
+                const discount = subtotal * 0.2; // 20% student discount
                 breakdown.push({
-                    item: `Base Package${extraHours > 0 ? ' + Additional Hours' : ''} (${3 + extraHours} hours total)`,
-                    cost: Math.round(subtotal)
+                    item: 'Student Discount (20%)',
+                    cost: -Math.round(discount)
                 });
+                total += subtotal - discount;
+            } else {
+                total += subtotal;
             }
         }
-    }
-
-    // Add cost for additional photographers
-    if (additionalPhotographers > 0 && packageType !== 'none') {
-        const photographerCost = additionalPhotographers * 300;
-        total += photographerCost;
-        breakdown.push({
-            item: `Additional Photographers (${additionalPhotographers})`,
-            cost: photographerCost
-        });
     }
 
     // Add transportation cost if outside Selangor
@@ -144,22 +155,105 @@ function calculateTotal() {
         const monthsDifference = (eventDate.getFullYear() - today.getFullYear()) * 12 + 
                                 (eventDate.getMonth() - today.getMonth());
         
-        // If booking is more than 3 months away, deposit is 30%, otherwise 50%
-        const depositPercentage = monthsDifference > 3 ? 0.3 : 0.5;
+        // If booking is more than 1 month away, deposit is 30%, otherwise 50%
+        const depositPercentage = monthsDifference > 1 ? 0.3 : 0.5;
         deposit = Math.ceil(total * depositPercentage);
         depositText = `RM${deposit} (${depositPercentage * 100}%)`;
     }
     
     // Update deposit display
     document.getElementById('deposit-amount').textContent = depositText;
+
+    updateWhatsAppButton();
+}
+
+function updateWhatsAppButton() {
+    const packageType = document.getElementById('package-type').value;
+    const location = document.getElementById('location').value;
+    const eventDate = document.getElementById('event-date').value;
+    const whatsappLink = document.getElementById('whatsapp-link');
+
+    // Check if wedding package is selected
+    let weddingPackageValid = true;
+    if (packageType === 'wedding') {
+        const weddingPackage = document.getElementById('wedding-package').value;
+        weddingPackageValid = weddingPackage !== 'none';
+    }
+
+    // Check if hourly package is selected
+    let hourlyPackageValid = true;
+    if (packageType === 'hourly') {
+        const hourlyBase = document.getElementById('hourly-base').value;
+        hourlyPackageValid = hourlyBase !== 'none';
+    }
+
+    // Check if all required fields are filled
+    const isValid = packageType !== 'none' && 
+                   location !== 'none' && 
+                   eventDate !== '' && 
+                   weddingPackageValid && 
+                   hourlyPackageValid;
+
+    if (isValid) {
+        whatsappLink.classList.remove('bg-gray-500', 'opacity-50', 'cursor-not-allowed');
+        whatsappLink.classList.add('bg-green-600', 'hover:bg-green-700');
+        updateWhatsAppLink(); // Only update the link if form is valid
+    } else {
+        whatsappLink.classList.add('bg-gray-500', 'opacity-50', 'cursor-not-allowed');
+        whatsappLink.classList.remove('bg-green-600', 'hover:bg-green-700');
+        whatsappLink.href = '#';
+    }
+}
+
+function updateWhatsAppLink() {
+    const packageType = document.getElementById('package-type').value;
+    const location = document.getElementById('location').value;
+    const eventDate = document.getElementById('event-date').value;
+    const isStudent = document.getElementById('student-discount').checked;
+    const total = document.getElementById('total-amount').textContent;
+    const deposit = document.getElementById('deposit-amount').textContent;
+    
+    let packageDetails = '';
+    if (packageType === 'wedding') {
+        const weddingPackage = document.getElementById('wedding-package').value;
+        packageDetails = `Package: ${weddingPackage.charAt(0).toUpperCase() + weddingPackage.slice(1)}`;
+    } else if (packageType === 'hourly') {
+        const hourlyBase = document.getElementById('hourly-base').value;
+        const extraHours = parseInt(document.getElementById('extra-hours').value) || 0;
+        if (hourlyBase === 'base') {
+            packageDetails = `Package: First 3 Hours${extraHours > 0 ? ` + ${extraHours} additional hours` : ''}`;
+        } else if (hourlyBase === 'fullday') {
+            packageDetails = 'Package: Full Day (8 Hours)';
+        }
+    }
+
+    const message = `Hi Arfiaa Studio 👋
+
+I'm interested in booking a photoshoot:
+
+Type: ${packageType.charAt(0).toUpperCase() + packageType.slice(1)}
+${packageDetails}
+Location: ${location === 'within' ? 'Within Selangor' : 'Outside Selangor'}
+Event Date: ${eventDate}
+${isStudent ? 'I am a full time student (20% discount applies)' : ''}
+
+Quote Summary:
+Total: ${total}
+Required Deposit: ${deposit}
+
+Please confirm my booking. Thank you! 😊`;
+
+    const whatsappLink = document.getElementById('whatsapp-link');
+    whatsappLink.href = `https://wa.me/601111260463?text=${encodeURIComponent(message)}`;
 }
 
 // Initialize calculator when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners
     document.getElementById('package-type').addEventListener('change', updatePackageVisibility);
+    document.getElementById('hourly-base').addEventListener('change', updatePackageVisibility);
     
-    const inputs = ['wedding-package', 'hourly-base', 'extra-hours', 'location', 'event-date', 'student-discount', 'photographers'];
+    const inputs = ['wedding-package', 'hourly-base', 'extra-hours', 'location', 'event-date', 'student-discount'];
     inputs.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
@@ -171,10 +265,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    const whatsappInputs = ['package-type', 'wedding-package', 'hourly-base', 'extra-hours', 'location', 'event-date', 'student-discount'];
+    whatsappInputs.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            if (element.type === 'checkbox') {
+                element.addEventListener('change', updateWhatsAppButton);
+            } else {
+                element.addEventListener('change', updateWhatsAppButton);
+            }
+        }
+    });
+
     // Set minimum date to today
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('event-date').min = today;
 
     // Initial calculation
     updatePackageVisibility();
+
+    // Initial WhatsApp button update
+    updateWhatsAppButton();
 });

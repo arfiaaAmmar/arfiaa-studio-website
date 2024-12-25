@@ -246,7 +246,7 @@
               >Services</a
             >
             <a
-              href="#RecentWorks"
+              href="#recent-works"
               class="text-white hover:text-gray-200 font-inter"
               >Works</a
             >
@@ -291,7 +291,7 @@
               >Services</a
             >
             <a
-              href="#RecentWorks"
+              href="#recent-works"
               class="text-white hover:text-gray-200 font-inter"
               >Portfolio</a
             >
@@ -475,7 +475,7 @@
                 Solemnisation
               </h4>
               <div class="border-b border-gray-600 mb-6"></div>
-              <p class="text-3xl font-bold mb-6">RM800</p>
+              <p class="text-3xl font-bold mb-6">RM700</p>
               <ul class="space-y-2">
                 <li>• 50% deposit</li>
                 <li>• Shoot & burn (No Album)</li>
@@ -489,11 +489,11 @@
             <div class="mb-8">
               <h4 class="text-3xl font-bebas tracking-wider mb-2">Reception</h4>
               <div class="border-b border-gray-600 mb-6"></div>
-              <p class="text-3xl font-bold mb-6">RM1200</p>
+              <p class="text-3xl font-bold mb-6">RM1000</p>
               <ul class="space-y-2">
                 <li>• 50% deposit</li>
                 <li>• Shoot & burn (No Album)</li>
-                <li>• Coverage 5-6 hours</li>
+                <li>• Coverage 7-8 hours</li>
                 <li>• 1 photographer</li>
                 <li>• Unlimited shoot</li>
                 <li>• Same-day preview</li>
@@ -502,7 +502,7 @@
 
             <div class="mt-4 text-yellow-400">
               <p class="text-xl font-bold">2 EVENT COMBINED</p>
-              <p class="text-3xl font-bold">RM1500 <span class="line-through text-sm font-normal">RM2000</span></p>
+              <p class="text-3xl font-bold">RM1500 <span class="line-through text-sm font-normal">RM1700</span></p>
               <p class="text-sm">Book for only RM500</p>
             </div>
           </div>
@@ -510,7 +510,7 @@
           <!-- Portrait Photography -->
           <div class="bg-black/50 backdrop-blur-sm p-8 rounded-lg text-white">
             <h3 class="text-yellow-400 text-2xl font-bebas mb-6">
-              Hourly Packages
+              Hourly & Day Packages
             </h3>
             <p class="text-sm font-inter mb-8 text-gray-300">
               Professional portrait sessions charged by the hour. Perfect for
@@ -524,37 +524,31 @@
                 First 3 Hours
               </h4>
               <div class="border-b border-gray-600 mb-6"></div>
-              <p class="text-3xl font-bold mb-6">RM550</p>
+              <p class="text-3xl font-bold mb-6">RM500</p>
               <ul class="space-y-2">
                 <li>• 50% Deposit</li>
-                <li>• Shoot & Burn (No Album)</li>
+                <li>• Student Discount (20%)</li>
                 <li>• Single location</li>
-                <li>• Student Discount</li>
                 <li>• Unlimited shoot</li>
+                <li>• Photo selection session</li>
                 <li>• Same-day preview</li>
               </ul>
             </div>
 
             <div class="mb-4">
               <h4 class="text-3xl font-bebas tracking-wider mb-2">
-                More Hours (Max +3)
+                Full Day (8 Hours)
               </h4>
               <div class="border-b border-gray-600 mb-6"></div>
-              <p class="text-3xl font-bold mb-6">RM150/hour</p>
+              <p class="text-3xl font-bold mb-6">RM1000</p>
               <ul class="space-y-2">
-                <li>• Extra location possible</li>
-                <li>• 10 more edited photos/hour</li>
-                <li>• Additional outfit changes</li>
-                <li>• 10% off each additional hour</li>
-                <li>• Eat & select</li>
+                <li>• 50% Deposit </li>
+                <li>• Student Discount (20%)</li>
+                <li>• 8 Hours coverage</li>
+                <li>• Multiple locations</li>
                 <li>• Photo selection session</li>
+                <li>• Same-day preview</li>
               </ul>
-            </div>
-
-            <div class="mt-8 text-yellow-400">
-              <p class="text-xl font-bold">FULL DAY PHOTOSHOOT</p>
-              <p class="text-3xl font-bold">RM800 <span class="line-through text-sm font-normal">RM1020</span></p>
-              <p class="text-sm">Book for only RM200</p>
             </div>
           </div>
 
@@ -593,21 +587,22 @@
               <!-- Hourly Event Options -->
               <div id="hourly-options" class="hidden space-y-6">
                 <div>
-                  <label class="block mb-2">Base Package (First 3 Hours)</label>
+                  <label class="block mb-2">Base Package</label>
                   <select id="hourly-base" class="w-full bg-gray-800 text-white p-2 rounded">
                     <option value="none">Select Package</option>
-                    <option value="base">First 3 Hours (RM550)</option>
+                    <option value="base">First 3 Hours (RM500)</option>
+                    <option value="fullday">Full Day - 8 Hours (RM1000)</option>
                   </select>
                 </div>
                 <div id="extra-hours-container">
                   <label class="block mb-2">Additional Hours (Max +3)</label>
                   <input type="number" id="extra-hours" min="0" max="3" value="0" class="w-full bg-gray-800 text-white p-2 rounded">
-                  <p class="text-sm text-gray-400 mt-1">* RM150/hour with 10% off each additional hour</p>
+                  <p class="text-sm text-gray-400 mt-1">* RM150/hour</p>
                 </div>
                 <div>
                   <label class="flex items-center space-x-2">
                     <input type="checkbox" id="student-discount" class="rounded bg-gray-800 text-yellow-400 focus:ring-yellow-400">
-                    <span>Are you a student? (10% off)</span>
+                    <span>Are you a full time student? (20% off)</span>
                   </label>
                 </div>
               </div>
@@ -621,37 +616,33 @@
               </div>
 
               <div>
-                <label class="block mb-2">Additional Photographers (+RM300/photographer)</label>
-                <select id="photographers" class="w-full bg-gray-800 text-white p-2 rounded">
-                  <option value="0">No additional photographer</option>
-                  <option value="1">+1 photographer (Total: 2)</option>
-                  <option value="2">+2 photographers (Total: 3)</option>
-                </select>
-                <p class="text-sm text-gray-400 mt-1">* Package includes 1 Pro photographer by default</p>
-              </div>
-
-              <div>
                 <label class="block mb-2">Event Date</label>
                 <input type="date" id="event-date" class="w-full bg-gray-800 text-white p-2 rounded" required>
-                <p class="text-sm text-gray-400 mt-1">* 30% deposit for bookings more than 3 months in advance</p>
+                <div class="text-sm text-gray-400 mt-4">
+                  <p>* 30% deposit for more than 1 month</p>
+                  <p>* 50% deposit for within 1 month</p>
+                </div>
               </div>
 
               <div class="mt-8 p-4 bg-gray-800/50 rounded">
-                <h4 class="text-xl font-bebas mb-4">Your Quote</h4>
-                <div id="invoice-breakdown" class="mb-4">
-                  <!-- Breakdown will be inserted here by JavaScript -->
+                <h4 class="text-xl font-bebas mb-4">Quote Summary</h4>
+                <div id="invoice-breakdown" class="mb-4"></div>
+                <div class="flex justify-between font-bold">
+                  <span>Total:</span>
+                  <span id="total-amount">RM0</span>
                 </div>
-                <div class="border-t border-gray-600 pt-4">
-                  <div class="flex justify-between mb-2">
-                    <span class="font-bold">Total Amount:</span>
-                    <span id="total-amount" class="font-bold">RM0</span>
-                  </div>
-                  <div class="flex justify-between text-yellow-400">
-                    <span>Required Deposit (50%):</span>
-                    <span id="deposit-amount">RM0</span>
-                  </div>
+                <div class="flex justify-between text-sm mt-2">
+                  <span>Required Deposit:</span>
+                  <span id="deposit-amount">-</span>
                 </div>
               </div>
+
+              <a id="whatsapp-link" href="#" target="_blank" class="block mt-6 bg-gray-500 text-white py-3 px-6 rounded-lg text-center transition-all duration-300 flex items-center justify-center gap-2 opacity-50 cursor-not-allowed">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+                Let's talk money 😎
+              </a>
             </div>
           </div>
         </div>
@@ -663,12 +654,12 @@
           <p class="text-sm italic">
             * Travel fees may apply for locations outside of Selangor
           </p>
-          <p class="text-sm italic">* Custom packages available upon request</p>
+          <p class="text-sm italic">* Deposit is non-refundable (of course if reasons are undestandable, then sure. I'm not an evil guy 😔)</p>
         </div>
       </div>
     </section>
 
-    <section class="bg-[#171717] py-20">
+    <section id="recent-works" class="bg-[#171717] py-20">
       <div class="container max-w-5xl mx-auto px-4">
         <div class="text-center text-white mb-16">
           <h1 class="text-4xl md:text-5xl font-bebas tracking-wider mb-6">
@@ -1029,7 +1020,7 @@
       <div class="container max-w-6xl mx-auto px-4 mt-4">
         <div class="w-full md:w-full">
           <p class="text-base font-inter">
-            Powered by
+            Website powered by
             <a
               href="https://arfiaa-media.com"
               class="no-underline text-black font-bold"
