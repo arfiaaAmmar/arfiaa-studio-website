@@ -2,7 +2,8 @@
 package = "@netlify/plugin-lighthouse"
 
 [build]
-publish = "/"
+command = "pnpm build"
+publish = "dist"
 
 # Image optimization settings
 [[redirects]]

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Arfiaa Studio</title>
     <link rel="icon" type="image/svg+xml" href="img/logo/arfiaa-studio-logo.svg">
-    <script src="js/calculator.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -218,20 +217,20 @@
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/main.js" defer></script>
+    <script type="module" src="./js/index.js"></script>
   </head>
 
   <body
     id="home"
     class="flex flex-col h-full bg-black bg-cover bg-fixed bg-no-repeat bg-center font-inter text-base"
-    style="background-image: url('/img/recent-works/row1/funeral in my brain-2.jpeg?nf_resize=fit&w=1200')"
+    style="background-image: url('img/recent-works/row1/funeral in my brain-2.jpeg?nf_resize=fit&w=1200')"
   >
     <nav class="m-0 sticky top-0 flex justify-center animate-slideIn">
       <div class="w-full nav-blur relative">
         <div class="container max-w-6xl mx-auto flex items-center justify-between px-4 py-6">
           <a href="#home" class="flex items-center">
             <img
-              src="/img/logo/arfiaa-studio.svg?nf_resize=fit&w=400"
+              src="img/logo/arfiaa-studio.svg?nf_resize=fit&w=400"
               alt="Arfiaa Studio"
               class="h-8 w-auto"
             />
@@ -324,12 +323,12 @@
         <div class="w-full md:w-1/3 p-4 relative flex items-center">
           <div class="relative w-full">
             <img
-              src="/img/logo/arfiaa-studio-logo.svg?nf_resize=fit&w=400"
+              src="img/logo/arfiaa-studio-logo.svg?nf_resize=fit&w=400"
               alt="Arfiaa Studio Logo"
               class="w-full h-48 object-contain rounded-lg"
             />
             <img
-              src="/img/profile.jpg?nf_resize=fit&w=400"
+              src="img/profile.jpg?nf_resize=fit&w=400"
               alt="Profile Picture"
               class="w-24 h-24 rounded-full absolute -bottom-2 right-4 border-4 border-[#171717] shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer z-10"
             />
@@ -543,7 +542,7 @@
             <div class="space-y-6">
               <div>
                 <label class="block mb-2">Package Type</label>
-                <select id="package-type" class="w-full bg-gray-800 text-white p-2 rounded">
+                <select id="package-type" class="w-full bg-gray-800 text-white p-2 rounded" onchange="updatePackageVisibility()">
                   <option value="none">Select Type</option>
                   <option value="wedding">Wedding</option>
                   <option value="hourly">Hourly & Day</option>
@@ -668,7 +667,7 @@
             <!-- Portrait Photos -->
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row1/balqis-1.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row1/balqis-1.jpg?nf_resize=fit&w=400"
                 alt="Portrait photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -679,7 +678,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row1/balqis-2.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row1/balqis-2.jpg?nf_resize=fit&w=400"
                 alt="Portrait photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -690,7 +689,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row1/balqis-12.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row1/balqis-12.jpg?nf_resize=fit&w=400"
                 alt="Portrait photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -702,7 +701,7 @@
             <!-- Duplicate images for continuous scroll -->
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row1/balqis-1.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row1/balqis-1.jpg?nf_resize=fit&w=400"
                 alt="Portrait photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -713,7 +712,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row1/balqis-2.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row1/balqis-2.jpg?nf_resize=fit&w=400"
                 alt="Portrait photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -724,7 +723,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row1/balqis-12.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row1/balqis-12.jpg?nf_resize=fit&w=400"
                 alt="Portrait photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -741,7 +740,7 @@
             <!-- Wedding Photos -->
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row2/faten-13.jpeg?nf_resize=fit&w=400"
+                src="img/recent-works/row2/faten-13.jpeg?nf_resize=fit&w=400"
                 alt="Wedding photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -752,7 +751,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row2/dsc_5937-2.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row2/dsc_5937-2.jpg?nf_resize=fit&w=400"
                 alt="Wedding photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -763,7 +762,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row2/dsc_5967.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row2/dsc_5967.jpg?nf_resize=fit&w=400"
                 alt="Wedding photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -775,7 +774,7 @@
             <!-- Duplicate images for continuous scroll -->
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row2/faten-13.jpeg?nf_resize=fit&w=400"
+                src="img/recent-works/row2/faten-13.jpeg?nf_resize=fit&w=400"
                 alt="Wedding photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -786,7 +785,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row2/dsc_5937-2.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row2/dsc_5937-2.jpg?nf_resize=fit&w=400"
                 alt="Wedding photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -797,7 +796,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row2/dsc_5967.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row2/dsc_5967.jpg?nf_resize=fit&w=400"
                 alt="Wedding photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -814,7 +813,7 @@
             <!-- Event Photos -->
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/image 25.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/image 25.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -825,7 +824,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/image 26.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/image 26.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -836,7 +835,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/image 27.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/image 27.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -847,7 +846,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/funeral in my brain-14.jpeg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/funeral in my brain-14.jpeg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -858,7 +857,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/funeral in my brain-6.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/funeral in my brain-6.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -870,7 +869,7 @@
             <!-- Duplicate images for continuous scroll -->
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/image 25.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/image 25.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -881,7 +880,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/image 26.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/image 26.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -892,7 +891,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/image 27.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/image 27.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -903,7 +902,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/funeral in my brain-14.jpeg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/funeral in my brain-14.jpeg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -914,7 +913,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row3/funeral in my brain-6.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row3/funeral in my brain-6.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -931,7 +930,7 @@
             <!-- Row 4 -->
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row4/IMG_0753.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row4/IMG_0753.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -942,7 +941,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row4/IMG_0817.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row4/IMG_0817.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -953,7 +952,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row4/IMG_0825-4.jpg?nf_resize=fit&w=400"
+                src="img/recent-works/row4/IMG_0825-4.jpg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -964,7 +963,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row4/IMG_1012-2.jpeg?nf_resize=fit&w=400"
+                src="img/recent-works/row4/IMG_1012-2.jpeg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -975,7 +974,7 @@
             </div>
             <div class="gallery-item">
               <img
-                src="/img/recent-works/row4/IMG_1020-2.jpeg?nf_resize=fit&w=400"
+                src="img/recent-works/row4/IMG_1020-2.jpeg?nf_resize=fit&w=400"
                 alt="Event photography"
                 class="cursor-pointer"
                 onclick="fullscreen(this)"
@@ -999,7 +998,7 @@
       </div>
       <a href="https://wa.me/message/QYYQKYYYY3Y4B1" target="_blank">
         <img
-          src="/img/logo/whatsapp-chat.png?nf_resize=fit&w=400"
+          src="img/logo/whatsapp-chat.png?nf_resize=fit&w=400"
           alt=""
           class="w-16 h-auto hover:scale-110 transition-transform duration-100"
         />
@@ -1029,7 +1028,5 @@
         </div>
       </div>
     </footer>
-
-    <script src="js/main.js" defer></script>
   </body>
 </html>

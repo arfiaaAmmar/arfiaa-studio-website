@@ -12,7 +12,7 @@ importers:
         specifier: ^2.30.0
         version: 2.30.0
       jquery:
-        specifier: ^3.6.0
+        specifier: ^3.7.1
         version: 3.7.1
     devDependencies:
       autoprefixer:

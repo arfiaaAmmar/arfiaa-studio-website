@@ -1,4 +1,5 @@
-function updatePackageVisibility() {
+// Pricing calculator stuff
+export function updatePackageVisibility() {
   const packageType = document.getElementById("package-type").value;
   const weddingOptions = document.getElementById("wedding-options");
   const hourlyOptions = document.getElementById("hourly-options");
@@ -16,7 +17,7 @@ function updatePackageVisibility() {
     weddingOptions.classList.remove("hidden");
   } else if (packageType === "hourly") {
     hourlyOptions.classList.remove("hidden");
-    
+
     // Show/hide extra hours or days based on package selection
     const hourlyBase = document.getElementById("hourly-base").value;
     if (hourlyBase === "base") {
@@ -29,7 +30,7 @@ function updatePackageVisibility() {
   calculateTotal();
 }
 
-function calculateTotal() {
+export function calculateTotal() {
   const packageType = document.getElementById("package-type").value;
   const location = document.getElementById("location").value;
   let total = 0;
@@ -65,7 +66,7 @@ function calculateTotal() {
     if (hourlyBase === "base") {
       // Add base package cost (First 3 Hours)
       subtotal = 500;
-      
+
       // Calculate additional hours
       const extraHours =
         parseInt(document.getElementById("extra-hours").value) || 0;
@@ -132,13 +133,13 @@ function calculateTotal() {
 
   breakdown.forEach((item) => {
     invoiceBreakdown.innerHTML += `
-            <div class="flex justify-between mb-2">
-                <span>${item.item}</span>
-                <span>${item.cost >= 0 ? "RM" : "-RM"}${Math.abs(
+              <div class="flex justify-between mb-2">
+                  <span>${item.item}</span>
+                  <span>${item.cost >= 0 ? "RM" : "-RM"}${Math.abs(
       item.cost
     )}</span>
-            </div>
-        `;
+              </div>
+          `;
   });
 
   // Add total
@@ -154,7 +155,10 @@ function calculateTotal() {
     // Fixed RM500 deposit for "both" wedding package
     deposit = 500;
     depositText = `RM${deposit} (Fixed)`;
-  } else if (packageType === "hourly" && document.getElementById("hourly-base").value === "multiday") {
+  } else if (
+    packageType === "hourly" &&
+    document.getElementById("hourly-base").value === "multiday"
+  ) {
     // Fixed RM900 deposit for multi-day events (first day amount)
     deposit = 900;
     depositText = `RM${deposit} (Fixed - First Day Amount)`;
@@ -178,7 +182,7 @@ function calculateTotal() {
   updateWhatsAppButton();
 }
 
-function updateWhatsAppButton() {
+export function updateWhatsAppButton() {
   const packageType = document.getElementById("package-type").value;
   const location = document.getElementById("location").value;
   const eventDate = document.getElementById("event-date").value;
@@ -225,7 +229,7 @@ function updateWhatsAppButton() {
   }
 }
 
-function updateWhatsAppLink() {
+export function updateWhatsAppLink() {
   const packageType = document.getElementById("package-type").value;
   const location = document.getElementById("location").value;
   const eventDate = document.getElementById("event-date").value;
@@ -256,83 +260,21 @@ function updateWhatsAppLink() {
   }
 
   const message = `Hi Arfiaa Studio 👋. I'm interested in booking this photoshoot:
-
-Type: ${packageType.charAt(0).toUpperCase() + packageType.slice(1)}
-${packageDetails}
-Location: ${location === "within" ? "Within Selangor" : "Outside Selangor"}
-Event Date: ${eventDate}
-${isStudent ? "I am a full time student (20% discount applies)" : ""}
-
-Quote Summary:
-Total: ${total}
-Required Deposit: ${deposit}
-
-Please confirm my booking. Thank you! 😊`;
+  
+  Type: ${packageType.charAt(0).toUpperCase() + packageType.slice(1)}
+  ${packageDetails}
+  Location: ${location === "within" ? "Within Selangor" : "Outside Selangor"}
+  Event Date: ${eventDate}
+  ${isStudent ? "I am a full time student (20% discount applies)" : ""}
+  
+  Quote Summary:
+  Total: ${total}
+  Required Deposit: ${deposit}
+  
+  Please confirm my booking. Thank you! 😊`;
 
   const whatsappLink = document.getElementById("whatsapp-link");
   whatsappLink.href = `https://wa.me/601111260463?text=${encodeURIComponent(
     message
   )}`;
 }
-
-// Initialize calculator when DOM is loaded
-document.addEventListener("DOMContentLoaded", function () {
-  // Add event listeners
-  document
-    .getElementById("package-type")
-    .addEventListener("change", updatePackageVisibility);
-  document
-    .getElementById("hourly-base")
-    .addEventListener("change", updatePackageVisibility);
-
-  const inputs = [
-    "wedding-package",
-    "hourly-base",
-    "extra-hours",
-    "num-days",
-    "location",
-    "event-date",
-    "student-discount",
-  ];
-  inputs.forEach((id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      if (element.type === "checkbox") {
-        element.addEventListener("change", calculateTotal);
-      } else {
-        element.addEventListener("change", calculateTotal);
-      }
-    }
-  });
-
-  const whatsappInputs = [
-    "package-type",
-    "wedding-package",
-    "hourly-base",
-    "extra-hours",
-    "num-days",
-    "location",
-    "event-date",
-    "student-discount",
-  ];
-  whatsappInputs.forEach((id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      if (element.type === "checkbox") {
-        element.addEventListener("change", updateWhatsAppButton);
-      } else {
-        element.addEventListener("change", updateWhatsAppButton);
-      }
-    }
-  });
-
-  // Set minimum date to today
-  const today = new Date().toISOString().split("T")[0];
-  document.getElementById("event-date").min = today;
-
-  // Initial calculation
-  updatePackageVisibility();
-
-  // Initial WhatsApp button update
-  updateWhatsAppButton();
-});
